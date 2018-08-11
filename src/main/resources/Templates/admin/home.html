@@ -13,9 +13,25 @@
 <body>
 	<div class="container">
 	
-		<form th:action="@{/logout}" method="get">
-			<button class="btn btn-md btn-danger btn-block" name="registration"
-				type="Submit">Logout</button>
+		<form th:action="@{/logout1}" method="post">
+
+			<div class="form-inline">
+				<div class="col-lg-1">
+					<button class="btn btn-md btn-link btn-block" name="action" value="logout"
+							type="Submit">Logout</button>
+				</div>
+
+				<div class="col-lg-2">
+					<button class="btn btn-md btn-link btn-block" name="action" value="newUser"
+							type="Submit">Create new user</button>
+				</div>
+
+				<div class="col-lg-2">
+					<button class="btn btn-md btn-link btn-block" type="button"
+							th:onclick="'updateContactInfo(\'' + ${userEntity.id}+ '\' , \'' + ${userEntity.lastName}+ '\');return;'"
+						>Update Contact Info</button>
+				</div>
+			</div>
 		</form>    
 		
 		<div class="panel-group" style="margin-top:40px">
@@ -27,9 +43,51 @@
 					<p class="admin-message-text text-center">Welcome :: <span th:utext="${userNameText}"></span></p>
 				</div>
 				<p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
+
+				<div class="row" id="contact-info" style="margin: -3px;display:none;">
+					<div class="col-md-6">
+						<form autocomplete="off" action="#" th:action="@{/updateContactInfo}"
+							  th:object="${userEntity}" method="post" class="form-horizontal"
+							  role="form">
+							<div class="form-group">
+								<div class="col-sm-9">
+									<label th:if="${#fields.hasErrors('mobileNo')}" th:errors="*{mobileNo}"
+										   class="validation-message"></label>
+									<input type="text" th:field="*{mobileNo}" placeholder="Mobile No."
+										   class="form-control" />
+								</div>
+
+								<div class="col-sm-9">
+									<label th:if="${#fields.hasErrors('address')}" th:errors="*{address}"
+										   class="validation-message"></label>
+									<input type="text" th:field="*{address}" placeholder="Address"
+										   class="form-control" />
+								</div>
+
+								<div class="col-sm-9">
+									<label th:if="${#fields.hasErrors('alternativeEmail')}" th:errors="*{alternativeEmail}"
+										   class="validation-message"></label>
+									<input type="text" th:field="*{alternativeEmail}" placeholder="Alternative Email"
+										   class="form-control" />
+								</div>
+
+								<div class="col-sm-9">
+									<button class="btn btn-md btn-primary btn-block" type="button">Update Info</button>
+								</div>
+							</div>
+
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
 		
 	</div>
+
+	<script th:inline="javascript">
+		function updateContactInfo(userId , lastName) {
+			$('#contact-info').fadeIn();
+		}
+	</script>
 </body>
 </html>
