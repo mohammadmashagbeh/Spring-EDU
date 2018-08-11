@@ -64,6 +64,17 @@ public class UserSystem {
               )
     private Set<SystemRole> roles;
 
+    /** Mobile No. */
+    @Column(name = "MOBILE_NO")
+    private String mobileNo;
+
+    /** Address */
+    private String address;
+
+    /** Alternative Email. */
+    @Column(name = "ALTERNATIVE_EMAIL")
+    private String alternativeEmail;
+
     /**
      * Setter
      */
@@ -89,6 +100,18 @@ public class UserSystem {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setMobileNo(String mobileNo) {
+        this.mobileNo = mobileNo;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setAlternativeEmail(String alternativeEmail) {
+        this.alternativeEmail = alternativeEmail;
     }
 
     /**
@@ -125,5 +148,17 @@ public class UserSystem {
 
     public void setRoles(Set<SystemRole> roles) {
         this.roles = roles;
+    }
+
+    public String getMobileNo() {
+        return mobileNo;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getAlternativeEmail() {
+        return alternativeEmail;
     }
 }
